@@ -22,7 +22,7 @@ UNIVERSE=readFileToList("./dictionnaire")
 
 
 
-def Dictionary(dictionary=UNIVERSEmini,showExecutionTime=False):
+def Dictionary(dictionary,showExecutionTime=False):
     start = time.time()
     ht = HashTable()
     for word in dictionary:
@@ -32,14 +32,14 @@ def Dictionary(dictionary=UNIVERSEmini,showExecutionTime=False):
         print("Execution time : ",(time.time())-start)
     return ht
 
-print(UNIVERSE)
+
 #############################TestMini############################
 Firstmultiset= ['a', 'd', 'e', 'e', 'i', 'i', 'l', 'n', 'n', 'n', 'o', 'r', 'u', 'x']
 Secondmultiset=['a', 'a', 'a', 'a', 'e', 'i', 'n', 'n', 'o', 'r', 's', 's', 's', 's', 't', 'w', 'z']
 Dictionary(True)
-print(Dictionary())
-print(Dictionary().searchComplementary(Firstmultiset,True))
-print(Dictionary().searchComplementary(Secondmultiset,True))
+print(Dictionary(UNIVERSEmini))
+print(Dictionary(UNIVERSEmini).searchComplementary(Firstmultiset,True))
+print(Dictionary(UNIVERSEmini).searchComplementary(Secondmultiset,True))
 #############################TestFull############################
 
 
