@@ -1,80 +1,111 @@
 import math
-import LinkedList
+from itertools import repeat
+import time
+SIZEMAX=89
+
 class HashTable:
     """
     HashTable is a class that implements a hash table with it s own hach function "getHash".
-    HasTable : key() --> Value  using Chain class to define the pair(key,value)
-    we intilize thee hashtable as empty and we can insert ,find , remove element from our hashTable
-
-
-
-    
-    
-    
+    HasTable : key() --> Value  
+    we intilize the hashtable as empty and we can insert ,find , remove element from our self.keys
+        
     """
 
 
-    def __init__(self,sizeMax=89) :
-        self.sizeMax=sizeMax
+    def __init__(self) :
+        """intiates our hash table"""
+        self.sizeMax=SIZEMAX
         self.size=0
-        self.keys=[None]*sizeMax
-
+        self.keys=dict(zip(range(SIZEMAX), repeat([])))
         
-            
-    
-    def getHash(self,key):
-        """
-        returns: the index of the key in the hashTable
 
-        param : key:"set of charecters" 
+    
+    def getHash(self,key:list):
+        """
+        returns: the hash value 
+
+        param : key=type:list of charecters
         """
         K=0
-        for charcter in set(key):
+        key.sort()
+        for charcter in key:
             K+=ord(charcter)
         K=math.floor(K*math.pi)
         return K%self.sizeMax
         
     
-    def __getitem__(self,key):
+    def get(self,key):
          """
          returns : the linked list associated with our index 
-         param : key:"set of charecters" 
+         param : key=type:list of charecters
          """
          hash= self.getHash(key)
-         linkedList = self.keys[hash]
-         #we go throug our lonked list until we find the value associated with the hash
-         while linkedList is not None and linkedList.key != hash:
-            linkedList = linkedList.next
-                
-            if linkedList is None:
-                    #not found 
-                    return None
-            else:
-                    #found
-                    return linkedList.value
-            
+         return self.keys[hash]
+         
+         
+    def set(self,key,value):
+        """
+        returns: None
 
-
-    def __setitem__(self,key,value):
-
+        param : key=type:list of charecters and Value 
+        """
         self.size+=1
         hash = self.getHash(key)
-        charSet=self.wordToCharSet(value)
+        
+        element = self.keys[hash]
+        
+        if element == []:
+            self.keys.__setitem__(hash,[key,value])
+        else:
+            self.keys[hash].append(value)
+    def remove(self,key):
+        """
+        removes the the value associated with our key in the hash table to equal an empty list
 
+        returns: None
 
-        if str(charSet) not in self[hash]:
-            self[key][str(charSet)]=[value]
-        if value not in self[key][str(charSet)]:
-                self[key][str(charSet)].append(value)
-
-    def wordToCharSet(self,word:str):
-         return set(word)
+        param : key=type:list of charecters and Value 
+        """
+        hash = self.getHash(key)
+        self.keys[hash]=[]
+        
     
+    def __str__(self):
+        """Overides the print function"""
+        res = "Hash Table:\n"
+        for key in self.keys.keys():
+            res+= 'Key: '+str(key)+' , Value : '
+            for value in self.keys[key] :
+                res+=str(value)+','
+            res+='\n'
+        return res
+        
+    def exists(self,key):
+        """ 
+        returns :True if the given key has stored values in the hash table
+        param : key=type:list of charecters and Value
+        """
+        item = self.get(key)
+        return (item !=[])
 
-    def hashTableFromList(self,list:list):
-         i=0
-         for item in list:
-              key = self.wordToCharSet(item)
-              self.__setitem__(key,item)
-              i+=1
-         return self
+    def searchComplementary(self,multiset,showExecutionTime=False):
+        """
+        returns :the list containing the words that add uop to the 2 sum of the given multiset
+        param : key=type:list of charecters and Value
+        
+        
+        """
+        start =time.time()
+        for i in range(len(multiset)+1):
+            Usubset=multiset[0:i]
+            
+            if self.exists(Usubset):
+                Vsubset=multiset[i:len(multiset)]
+                
+                if self.exists(Vsubset):
+                    if showExecutionTime:
+                        print("Execution Time : ",(time.time())-start)
+                    return "the words : "+str(self.keys[self.getHash(Usubset)])+"and"+str(self.keys[self.getHash(Vsubset)])+" are the 2-sum of the set "+str(multiset)
+        
+
+    

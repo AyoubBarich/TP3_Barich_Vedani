@@ -4,53 +4,44 @@
 
 import fileinput as file
 import math
-import HashTable
-UNIVERSE=[]
-File = file.input("./mini")
-for word in File:
-    UNIVERSE.append(word.strip('\n'))
+import time
+from HashTable import HashTable
 
-N=len(UNIVERSE)
 
-PHI = (math.sqrt(5)-1)/2
 
-TestDict=["art","rat","alice","bob"]
+def readFileToList(filepath):
+    UNIVERSE=[]
+    File = file.input(filepath)
+    for word in File:
+        UNIVERSE.append(word.strip('\n'))
+    return UNIVERSE
 
-def HachFunction(K,const=2):
-    
-    return math.floor(const*(K*PHI-math.floor(K*PHI)))
+UNIVERSEmini=readFileToList("./mini")
+UNIVERSE=readFileToList("./dictionnaire")
 
-def wordToCharList(word:str):
-    return set(word)
 
-def getKey(hachfunction,word):
-    K=0
-    for charcter in set(word):
-        K+=ord(charcter)
-    K=math.floor(K*math.pi)
-    return hachfunction(K)
 
-#for our hash table we are going to use a string of a set of the alphabet as keys 
-# and the values associated with it are going to be the words accepted in dictionnary 
-# that contain the same letters in the key
 
-def Hashtable(dictionary=UNIVERSE,const=2):
-    hashTable={}
-    for i in range(const): 
-        hashTable[i]={}
+def Dictionary(dictionary=UNIVERSEmini,showExecutionTime=False):
+    start = time.time()
+    ht = HashTable()
     for word in dictionary:
-        
-        charSet = wordToCharList(word)
-        key= getKey(HachFunction,word)
-        if str(charSet) not in hashTable[key]:
-            hashTable[key][str(charSet)]=[word]
-        if word not in hashTable[key][str(charSet)]:
-                hashTable[key][str(charSet)].append(word)
+        key = [*word]
+        ht.set(key,word)
+    if showExecutionTime:
+        print("Execution time : ",(time.time())-start)
+    return ht
 
-    return hashTable
+#############################TestMini############################
+Firstmultiset= ['a', 'd', 'e', 'e', 'i', 'i', 'l', 'n', 'n', 'n', 'o', 'r', 'u', 'x']
+Secondmultiset=['a', 'a', 'a', 'a', 'e', 'i', 'n', 'n', 'o', 'r', 's', 's', 's', 's', 't', 'w', 'z']
+Dictionary(True)
+print(Dictionary())
+print(Dictionary().searchComplementary(Firstmultiset,True))
+print(Dictionary().searchComplementary(Secondmultiset,True))
+#############################TestFull############################
 
-hashtable =HashTable.hashTableFromList()
-print()
+
 
 
 
