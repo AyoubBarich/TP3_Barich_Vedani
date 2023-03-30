@@ -2,7 +2,7 @@ import math
 from itertools import repeat
 import time
 SIZEMAX=89
-
+PHI = (1+math.sqrt(5))/2
 class HashTable:
     """
     HashTable is a class that implements a hash table with its own hach function "getHash".
@@ -30,7 +30,7 @@ class HashTable:
         key.sort()
         for charcter in key:
             K+=ord(charcter)
-        K=math.floor(K*math.pi)
+        K=math.floor(K*PHI)
         return K%self.sizeMax
         
     
@@ -89,7 +89,7 @@ class HashTable:
         item = self.get(key)
         return (item !=[])
 
-    def searchComplementary(self,multiset,showExecutionTime=False):
+    def twosum(self,multiset,showExecutionTime=False):
         """
         returns :the list containing the words that add up to the 2 sum of the given multiset
         param : key=type:list of charecters and Value

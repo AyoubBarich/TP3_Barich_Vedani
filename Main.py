@@ -38,8 +38,8 @@ Firstmultiset= ['a', 'd', 'e', 'e', 'i', 'i', 'l', 'n', 'n', 'n', 'o', 'r', 'u',
 Secondmultiset=['a', 'a', 'a', 'a', 'e', 'i', 'n', 'n', 'o', 'r', 's', 's', 's', 's', 't', 'w', 'z']
 Dictionary(UNIVERSEmini,True)
 print(Dictionary(UNIVERSEmini))
-print(Dictionary(UNIVERSEmini).searchComplementary(Firstmultiset,True))
-print(Dictionary(UNIVERSEmini).searchComplementary(Secondmultiset,True))
+print(Dictionary(UNIVERSEmini).twosum(Firstmultiset,True))
+print(Dictionary(UNIVERSEmini).twosum(Secondmultiset,True))
 #############################TestFull############################
 
 
