@@ -36,7 +36,7 @@ def Dictionary(dictionary,showExecutionTime=False):
 #############################TestMini############################
 Firstmultiset= ['a', 'd', 'e', 'e', 'i', 'i', 'l', 'n', 'n', 'n', 'o', 'r', 'u', 'x']
 Secondmultiset=['a', 'a', 'a', 'a', 'e', 'i', 'n', 'n', 'o', 'r', 's', 's', 's', 's', 't', 'w', 'z']
-Dictionary(True)
+Dictionary(UNIVERSEmini,True)
 print(Dictionary(UNIVERSEmini))
 print(Dictionary(UNIVERSEmini).searchComplementary(Firstmultiset,True))
 print(Dictionary(UNIVERSEmini).searchComplementary(Secondmultiset,True))
