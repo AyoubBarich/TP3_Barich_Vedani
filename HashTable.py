@@ -5,15 +5,15 @@ SIZEMAX=89
 
 class HashTable:
     """
-    HashTable is a class that implements a hash table with it s own hach function "getHash".
-    HasTable : key() --> Value  
-    we intilize the hashtable as empty and we can insert ,find , remove element from our self.keys
+    HashTable is a class that implements a hash table with its own hach function "getHash".
+    HasTable : hash(key) --> Value  
+    we initialize the hashtable as empty and we can insert ,find , remove element from our hashtable.
         
     """
 
 
     def __init__(self) :
-        """intiates our hash table"""
+        """initiates our hash table"""
         self.sizeMax=SIZEMAX
         self.size=0
         self.keys=dict(zip(range(SIZEMAX), repeat([])))
@@ -36,8 +36,8 @@ class HashTable:
     
     def get(self,key):
          """
-         returns : the linked list associated with our index 
-         param : key=type:list of charecters
+         returns : the list associated with our index 
+         param : key=type:list of characters
          """
          hash= self.getHash(key)
          return self.keys[hash]
@@ -51,13 +51,14 @@ class HashTable:
         """
         self.size+=1
         hash = self.getHash(key)
-        
         element = self.keys[hash]
         
         if element == []:
             self.keys.__setitem__(hash,[key,value])
         else:
             self.keys[hash].append(value)
+
+
     def remove(self,key):
         """
         removes the the value associated with our key in the hash table to equal an empty list
@@ -90,7 +91,7 @@ class HashTable:
 
     def searchComplementary(self,multiset,showExecutionTime=False):
         """
-        returns :the list containing the words that add uop to the 2 sum of the given multiset
+        returns :the list containing the words that add up to the 2 sum of the given multiset
         param : key=type:list of charecters and Value
         
         
