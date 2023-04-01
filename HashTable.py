@@ -4,27 +4,37 @@ import time
 SIZEMAX=89
 PHI = (1+math.sqrt(5))/2
 
+class Node():
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+    
+
 class linkedList():
     def __init__(self,element,next):
         self.element=element
         self.next=next
         self.size=0
 
+
     def hasNext(self):
             return (self.next is not None)
     
     def set(self,element):
-        self.size+=1
+        
         newlist = linkedList(element,None)
+        current=self
         if self.hasNext():
-            self.next.set(element)
-        self.next = newlist 
+            current=current.next
+            current.set(element)
+        current.next = newlist 
+        self.size+=1
 
     def get(self):
        return self.element
     
     def isEmpty(self):
-        return self.element==[] and self.next is None
+        return ((self.element==[])&(self.next is None))
     def __iter__(self):
         return self
     def __next__(self):
