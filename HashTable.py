@@ -24,7 +24,7 @@ class linkedList():
         
         newlist = linkedList(element,None)
         current=self
-        if self.hasNext():
+        if current.hasNext():
             current=current.next
             current.set(element)
         current.next = newlist 
@@ -45,16 +45,19 @@ class linkedList():
             res += self.next.__str__()
         return res 
     def getElements(self):
-        currentElement = [self.element[0]]
-        if self.hasNext():
-            currentElement.append(self.next.getElements())
-        return currentElement
+        currentElement=self
+        currentElementlist = [self.element[0]]
+        if currentElement.hasNext():
+            currentElement=currentElement.next
+            currentElementlist.append(currentElement.getElements())
+        return currentElementlist
     def getElementFromIndex(self,index):
-        n=0
+        
         currentnode=self
-        while n<index:
-            if self.hasNext():
+        if currentnode.size!=index:
+            if currentnode.hasNext():
                 currentnode=self.next
+          
         return currentnode.element
         
             
@@ -137,10 +140,11 @@ class HashTable:
         #     if value not in target.element:
         #         self.keys[hash].element.append(value)
         elements=self.keys[hash].getElements()
+        print(elements)
         
         if key in elements:
             elementIndex=elements.index(key)
-            node =self.keys[hash]
+            node=self.keys[hash]
             if value not in node.getElementFromIndex(elementIndex) :
                 node.getElementFromIndex(elementIndex).append(value)
         else:
