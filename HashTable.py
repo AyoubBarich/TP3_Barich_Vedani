@@ -4,11 +4,6 @@ import time
 SIZEMAX=89
 PHI = (1+math.sqrt(5))/2
 
-class Node():
-    def __init__(self, data):
-        self.data = data
-        self.next = None
-    
 
 class linkedList():
     def __init__(self,element,next):
@@ -35,32 +30,36 @@ class linkedList():
     
     def isEmpty(self):
         return ((self.element==[])&(self.next is None))
+    
     def __iter__(self):
         return self
+    
     def __next__(self):
         return self.next
+    
     def __str__(self)->str:
         res=str(self.element)
         if self.hasNext():
             res += self.next.__str__()
         return res 
-    def getElements(self):
-        currentElement=self
-        currentElementlist = [self.element[0]]
-        if currentElement.hasNext():
-            currentElement=currentElement.next
-            currentElementlist.append(currentElement.getElements())
-        return currentElementlist
+    
+    # def getElements(self):
+    #     currentElement=self
+    #     currentElementlist = [self.element[0]]
+    #     if currentElement.hasNext():
+    #         currentElement=currentElement.next
+    #         currentElementlist.append(currentElement.getElements())
+    #     return currentElementlist
   
 
-    def getElementFromIndex(self,index):
+    # def getElementFromIndex(self,index):
         
-        currentnode=self
-        if currentnode.size!=index:
-            if currentnode.hasNext():
-                currentnode=self.next
+    #     currentnode=self
+    #     if currentnode.size!=index:
+    #         if currentnode.hasNext():
+    #             currentnode=self.next
           
-        return currentnode.element
+    #     return currentnode.element
         
             
 
@@ -179,25 +178,20 @@ class HashTable:
         """
         item = self.get(key)
         return (item !=[])
+    
+    def getAllCombinationsOfaMultiSet(self,multiset)
+        res=[]
+        for i in range(0,len(multiset)):
+            for 
 
-    def twosum(self,multiset,showExecutionTime=False):
-        """
-        returns :the list containing the words that add up to the 2 sum of the given multiset
-        param : key=type:list of charecters and Value
+    # def twosum(self,multiset,showExecutionTime=False):
+    #     """
+    #     returns :the list containing the words that add up to the 2 sum of the given multiset
+    #     param : key=type:list of charecters and Value
         
         
-        """
-        start =time.time()
-        for i in range(len(multiset)+1):
-            Usubset=multiset[0:i]
-             
-            if self.exists(Usubset):
-                Vsubset=multiset[i:len(multiset)]
-                
-                if self.exists(Vsubset):
-                    if showExecutionTime:
-                        print("Execution Time : ",(time.time())-start)
-                    return "the words : "+str(self.keys[self.getHash(Usubset)])+"and"+str(self.keys[self.getHash(Vsubset)])+" are the 2-sum of the set "+str(multiset)
-        
+    #     """
+
+      
 
     
