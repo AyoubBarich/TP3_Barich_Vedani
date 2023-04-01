@@ -37,21 +37,23 @@ def Dictionary(dictionary,showExecutionTime=False):
 #############################TestMini############################
 Firstmultiset= ['a', 'd', 'e', 'e', 'i', 'i', 'l', 'n', 'n', 'n', 'o', 'r', 'u', 'x']
 Secondmultiset=['a', 'a', 'a', 'a', 'e', 'i', 'n', 'n', 'o', 'r', 's', 's', 's', 's', 't', 'w', 'z']
-Dictionary(UNIVERSEmini,True)
-print(Dictionary(UNIVERSEmini))
+# Dictionary(UNIVERSEmini,True)
+# print(Dictionary(UNIVERSEmini))
 
 # print(Dictionary(UNIVERSEmini).twosum(Firstmultiset,True))
 # print(Dictionary(UNIVERSEmini).twosum(Secondmultiset,True))
 #############################TestFull############################
-
-# ht = HashTable()
-# ht.set(['t','r','a'],"art")
-# ht.set(['t','r','a'],"rat")
-# ht.set(['c', 'e', 'h', 'r', 't', 'é'],"rta")
-# ht.set(['c', 'e', 'h', 'r', 't', 'é'],"cet")
-# ht.set(['e', 'i', 'l', 't', 'u'],'mm')
-# ht.set(['u','s','a'],"usa")
-# print(ht)
+R=['a','o','u','u']
+ht = HashTable()
+ht.set(['t','r','a'],"art")
+ht.set(['t','r','a'],"rat")
+ht.set(['c', 'e', 'h', 'r', 't', 'é'],"rta")
+ht.set(['c', 'e', 'h', 'r', 't', 'é'],"cet")
+ht.set(['e', 'i', 'l', 't', 'u'],'mm')
+ht.set(['u','s','a'],"usa")
+ht.set(['a','u'],"au")
+ht.set(['o','u'],"ou")
+print(ht)
 
 
 

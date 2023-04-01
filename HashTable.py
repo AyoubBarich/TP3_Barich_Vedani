@@ -179,10 +179,10 @@ class HashTable:
         item = self.get(key)
         return (item !=[])
     
-    def getAllCombinationsOfaMultiSet(self,multiset)
-        res=[]
-        for i in range(0,len(multiset)):
-            for 
+    # def getAllCombinationsOfaMultiSet(self,multiset)
+    #     res=[]
+    #     for i in range(0,len(multiset)):
+    #         for 
 
     # def twosum(self,multiset,showExecutionTime=False):
     #     """
