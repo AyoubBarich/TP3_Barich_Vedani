@@ -51,6 +51,8 @@ class linkedList():
             currentElement=currentElement.next
             currentElementlist.append(currentElement.getElements())
         return currentElementlist
+  
+
     def getElementFromIndex(self,index):
         
         currentnode=self
@@ -123,10 +125,11 @@ class HashTable:
         """
         self.size+=1
         hash = self.getHash(key)
-        element = self.keys[hash]
+        linkedlist = self.keys[hash]
         
-        if element.isEmpty():
+        if linkedlist.isEmpty():
             self.keys.__setitem__(hash,linkedList([key,value],None))
+            return True
         # print(self.keys[hash].getElements())
         # print('key',key)
         # if key in self.keys[hash].getElements():
@@ -139,16 +142,23 @@ class HashTable:
         #         break;
         #     if value not in target.element:
         #         self.keys[hash].element.append(value)
-        elements=self.keys[hash].getElements()
-        print(elements)
-        
-        if key in elements:
-            elementIndex=elements.index(key)
-            node=self.keys[hash]
-            if value not in node.getElementFromIndex(elementIndex) :
-                node.getElementFromIndex(elementIndex).append(value)
-        else:
-            self.keys[hash].set([key,value])
+        # elements=self.keys[hash].getElements()
+    
+    
+        # if key in elements:
+        #     elementIndex=elements.index(key)
+        #     node=self.keys[hash]
+        #     if value not in node.getElementFromIndex(elementIndex) :
+        #         node.getElementFromIndex(elementIndex).append(value)
+        while linkedlist is not None:
+            if key in linkedlist.element:
+                if value not in linkedlist.element:
+                    linkedlist.element.append(value)
+                    return True
+            linkedlist=linkedlist.next
+
+        self.keys[hash].set([key,value])
+        return True
         
 
 
