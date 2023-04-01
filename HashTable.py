@@ -1,5 +1,6 @@
 import math
 from itertools import repeat
+from itertools import combinations
 import time
 SIZEMAX=89
 PHI = (1+math.sqrt(5))/2
@@ -177,12 +178,26 @@ class HashTable:
         param : key=type:list of charecters and Value
         """
         item = self.get(key)
-        return (item !=[])
+        return not(item.isEmpty())
     
-    # def getAllCombinationsOfaMultiSet(self,multiset)
-    #     res=[]
-    #     for i in range(0,len(multiset)):
-    #         for 
+    def getAllCombinationsOfaMultiSet(self,multiset):
+        res=[]
+        for i in range(1,len(multiset)):
+            for subSet in combinations(multiset, i):
+                if subSet not in res:
+                    res.append(subSet)
+        return res
+    def getComplementaryOfSet(self,multiset,set):
+        allCombinations=self.getAllCombinationsOfaMultiSet(multiset)
+        for comb in allCombinations: 
+            sum= list(comb)
+            sum=sum +set
+            sum =sorted(sum)
+            if sum == multiset:
+                return list(comb)
+    
+
+
 
     # def twosum(self,multiset,showExecutionTime=False):
     #     """

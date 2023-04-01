@@ -53,7 +53,7 @@ ht.set(['e', 'i', 'l', 't', 'u'],'mm')
 ht.set(['u','s','a'],"usa")
 ht.set(['a','u'],"au")
 ht.set(['o','u'],"ou")
-print(ht)
+print(ht.getComplementaryOfSet(R,['a','u']))
 
 
 
