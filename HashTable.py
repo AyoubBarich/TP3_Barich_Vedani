@@ -147,7 +147,7 @@ class HashTable:
          
     def set(self,key,value):
         """
-        returns: None
+        returns: True if the key value pair are correctly set in the hash table
 
         param : key=type:list of charecters and Value 
         """
@@ -231,15 +231,16 @@ class HashTable:
         """
         start =time.time()
         res=[]
-        allCombinations =self.getAllCombinationsOfaMultiSet(multiset)
         allCombinationsOfAMultiSet=self.getAllCombinationsOfaMultiSet(multiset)
         allCombinationOfmultiSetandComplementary=[]
         max = len(allCombinationsOfAMultiSet)
-        print(max)
+        
         progress=0
         for combination in allCombinationsOfAMultiSet:
             progress+=1
-            for complementary in self.getComplementaryOfSet(multiset,combination,allCombinations):
+            if math.floor(progress)%2==0:
+                print((progress/max)*100)
+            for complementary in self.getComplementaryOfSet(multiset,combination,allCombinationsOfAMultiSet):
                 print("combination : ",combination,"complementary :",complementary)
                 allCombinationOfmultiSetandComplementary.append((list(combination),list(complementary)))
         
