@@ -3,7 +3,8 @@ from itertools import repeat
 from itertools import combinations
 import time
 
-SIZEMAX=733
+SIZEMAX=141959
+# SIZEMAX=107
 PHI = (1+math.sqrt(5))/2
 
 
@@ -33,10 +34,9 @@ class linkedList():
         
         newlist = linkedList(element,None)
         current=self
-        if current.hasNext():
-            current=current.next
-            current.set(element)
-        current.next = newlist 
+        while current.hasNext():
+             current=current.next
+        current.next=newlist
         self.size+=1
 
     def get(self):
@@ -84,16 +84,26 @@ class linkedList():
         param:self , multiset:list
         """
         curr=self
-        
-        if not(curr.isEmpty()):
-            if curr.element[0]!=sorted(multiset):
-                if curr.hasNext():
+        while curr.hasNext():
+            if not(curr.isEmpty()):
+                if curr.element[0]!=sorted(multiset):
                     curr=curr.next
-                    curr.getElementFromMuliset(multiset)
-                return None
+
             res=curr.element[1:]
             return res
         return None
+                
+
+        
+        # if not(curr.isEmpty()):
+        #     if curr.element[0]!=sorted(multiset):
+        #         if curr.hasNext():
+        #             curr=curr.next
+        #             curr.getElementFromMuliset(multiset)
+        #         return None
+        #     res=curr.element[1:]
+        #     return res
+        # return None
 
 
     
@@ -134,6 +144,7 @@ class HashTable:
             K+=ord(charcter)
         K=math.floor(K*PHI)
         return K%self.sizeMax
+
         
     
     def get(self,key):
@@ -156,13 +167,14 @@ class HashTable:
         linkedlist = self.keys[hash]
         
         if linkedlist.isEmpty():
-            self.keys.__setitem__(hash,linkedList([key,value],None))
+            # self.keys.__setitem__(hash,linkedList([key,value],None))
+            self.keys[hash]=linkedList([key,value],None)
             return True
         while linkedlist is not None:
             if key in linkedlist.element:
-                if value not in linkedlist.element:
-                    linkedlist.element.append(value)
-                    return True
+                # if value not in linkedlist.element:
+                linkedlist.element.append(value)
+                return True
             linkedlist=linkedlist.next
 
         self.keys[hash].set([key,value])
@@ -201,25 +213,20 @@ class HashTable:
                     res.append(subSet)
         return res
     
-    
-    def getComplementaryOfSet(self,multiset,set,allCombinations):
-        """
-        returns:list of all complements of set that add up to multiset
-        param: multiset:list,set:list,allCombinations:list
-        
-        """
-        res=[]
-        for comb in allCombinations:
+
             
-            if list(comb) not in res:
-                sum= list(comb)
-                sum=sum + list(set)
-                sum =sorted(sum)
-                
-                if sum == multiset and self.exists(list(comb)):
-                    res.append(list(comb))
+    def getComplementaire(self,mutiSet,set ):
+        res = []
+        setlist = list(set)
+        mutiSetList= list(mutiSet)
+        for char in mutiSetList:
+            if char in setlist:
+                setlist.remove(char)
+            else:
+                res.append(char)
+        #if self.exists(res) :
         return res
-            
+        
     
 
 
@@ -233,22 +240,32 @@ class HashTable:
         res=[]
         allCombinationsOfAMultiSet=self.getAllCombinationsOfaMultiSet(multiset)
         allCombinationOfmultiSetandComplementary=[]
-        max = len(allCombinationsOfAMultiSet)
         
-        progress=0
+        
+        print("Step 1 Complete!")
         for combination in allCombinationsOfAMultiSet:
-            progress+=1
-            if math.floor(progress)%2==0:
-                print((progress/max)*100)
-            for complementary in self.getComplementaryOfSet(multiset,combination,allCombinationsOfAMultiSet):
-                print("combination : ",combination,"complementary :",complementary)
-                allCombinationOfmultiSetandComplementary.append((list(combination),list(complementary)))
+            complementary = self.getComplementaire(multiset,combination)
+            
+            
+            if complementary!=[] and self.exists(complementary) :
+                if (combination , complementary) not in allCombinationOfmultiSetandComplementary:
+                    allCombinationOfmultiSetandComplementary.append((combination, complementary))
+                
+        print("Step 2 complete!")
         
         for couple in allCombinationOfmultiSetandComplementary:
-            combination = self.get(list(couple[0])).getElementFromMuliset(list(couple[0]))
-            complementary=self.get(list(couple[1])).getElementFromMuliset(list(couple[1]))
-            if not(combination is None and complementary is None):
-                res.append((combination,complementary))
+            
+            # combination = self.get(list(couple[0])).getElementFromMuliset(list(couple[0]))
+            # complementary = self.get(list(couple[1])).getElementFromMuliset(list(couple[1]))
+            combination = self.get(list(couple[0]))
+            complementary = self.get(list(couple[1]))
+           
+
+            # if not(combination is None) :
+            #     print("b")
+            #     if not(complementary is None):
+            #         print("c")
+            res.append((combination.__str__(),complementary.__str__()))
 
         if showExecutionTime:
             print("Execution Time : ",time.time()-start)
