@@ -32,42 +32,20 @@ def Dictionary(dictionary,showExecutionTime=False):
     return ht
 
 
-#############################TestMini############################
+#############################TestMini############################(SIZEMAX = 107)
 Firstmultiset= ['a', 'd', 'e', 'e', 'i', 'i', 'l', 'n', 'n', 'n', 'o', 'r', 'u', 'x']
 Secondmultiset=['a', 'a', 'a', 'a', 'e', 'i', 'n', 'n', 'o', 'r', 's', 's', 's', 's', 't', 'w', 'z']
-dict= Dictionary(UNIVERSEmini,True)
+# dict= Dictionary(UNIVERSEmini,True)
 # print(Dictionary(UNIVERSEmini))
 
-print(dict.twoSum(Firstmultiset))
+# print(dict.twoSum(Firstmultiset,True))
 #print(Dictionary(UNIVERSEmini).twoSum(Secondmultiset))
-#############################TestFull############################
-R=['a','o','u','u']
-ht = HashTable()
-ht.set(['t','r','a'],"art")
-ht.set(['t','r','a'],"rat")
-ht.set(['c', 'e', 'h', 'r', 't', 'é'],"rta")
-ht.set(['c', 'e', 'h', 'r', 't', 'é'],"cet")
-ht.set(['e', 'i', 'l', 't', 'u'],'mm')
-ht.set(['e', 'i', 'l', 't', 'u'],'hello')
-ht.set(['u','s','a'],"usa")
-ht.set(['a','u'],"au")
-ht.set(['o','u'],"ou")
-ht.set(['d', 'e', 'i', 'i', 'n', 'o', 'x'],"dioxine")
+#############################TestFull############################(SIZEMAX=84919)
+dict=Dictionary(UNIVERSE,True)
+TestSet1=['a', 'b', 'e', 'e', 'i', 'i', 'i', 'l', 'l', 'n', 'n', 'o', 'r', 'r', 's', 's', 't', 'y', 'z', 'é']
+TestSet2=['a', 'a', 'a', 'b', 'd', 'e', 'i', 'i', 'i', 'l', 'l', 'n', 'o', 'r', 'r', 'r', 's', 't', 'z', 'z']
+TestSet3=['a', 'a', 'd', 'e', 'h', 'i', 'm', 'n', 'n', 'o', 'o', 'r', 'r', 't', 't', 'x', 'z']
+print(dict.twoSum(TestSet1,True))
+# print(dict.twoSum(TestSet1))
+# print(dict.twoSum(TestSet1))
 
-# print(ht)
-# print(ht.twoSum(R))
-
-# print(ht.getComplementaryOfSet(['a','o','u','u'],['a','u']))
-
-
-
-
-#version camille qui marche
-# def HashTable():
-#     hashTable=[]
-#     for i in range (0,89):
-#         hashTable.append([])
-#     for word in UNIVERSE:
-#         key = getKey(HachFunction,word)
-#         hashTable[key].append(word)
-#     return hashTable

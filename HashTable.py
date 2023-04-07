@@ -1,8 +1,9 @@
 import math
 from itertools import repeat
 from itertools import combinations
+import time
 
-SIZEMAX=107
+SIZEMAX=733
 PHI = (1+math.sqrt(5))/2
 
 
@@ -228,6 +229,7 @@ class HashTable:
         and add up to the multiSet 
         param: multiset:list
         """
+        start =time.time()
         res=[]
         allCombinations =self.getAllCombinationsOfaMultiSet(multiset)
         allCombinationsOfAMultiSet=self.getAllCombinationsOfaMultiSet(multiset)
@@ -247,6 +249,8 @@ class HashTable:
             if not(combination is None and complementary is None):
                 res.append((combination,complementary))
 
+        if showExecutionTime:
+            print("Execution Time : ",time.time()-start)
         return res
 
       
