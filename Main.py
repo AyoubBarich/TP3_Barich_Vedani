@@ -39,7 +39,7 @@ dict= Dictionary(UNIVERSEmini,True)
 # print(Dictionary(UNIVERSEmini))
 
 print(dict.twoSum(Firstmultiset))
-print(Dictionary(UNIVERSEmini).twoSum(Secondmultiset))
+#print(Dictionary(UNIVERSEmini).twoSum(Secondmultiset))
 #############################TestFull############################
 R=['a','o','u','u']
 ht = HashTable()

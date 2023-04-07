@@ -1,22 +1,34 @@
 import math
 from itertools import repeat
 from itertools import combinations
-import time
+
 SIZEMAX=107
 PHI = (1+math.sqrt(5))/2
 
 
 class linkedList():
+    """An implementation of a linked list where each element is a list where the first index containts 
+    the set charecters of our word and the other indexes contains the string  of the words  """
     def __init__(self,element,next):
+        """Intlize our class"""
         self.element=element
         self.next=next
         self.size=0
 
 
     def hasNext(self):
-            return (self.next is not None)
+        """
+        returns: true if self has a linkedlist to the left
+        param : self
+        """
+        return (self.next is not None)
     
     def set(self,element):
+        """
+        traverses the Linkedlist until the last Linkedlist attaches a linked list wich contains element
+        returns: None
+        param : self,element:list
+        """
         
         newlist = linkedList(element,None)
         current=self
@@ -27,8 +39,16 @@ class linkedList():
         self.size+=1
 
     def get(self):
+       """
+       return:elemnt in the current LinkedList
+       param:self
+       """
        return self.element
     def exists(self,element):
+        """
+        returns:True if element is in the linked list
+        param: element:list
+        """
         curr = self
         
         if curr.element!= element:
@@ -43,15 +63,25 @@ class linkedList():
 
     
     def isEmpty(self):
+        """
+        returns:True if self is empty
+        param:self
+        """
         return ((self.element==[])&(self.next is None))
     
     def __iter__(self):
+        """Overides the iteration function"""
         return self
     
     def __next__(self):
+        """Overides the next function in iterable"""
         return self.next
     
     def getElementFromMuliset(self,multiset):
+        """
+        returns:the element in our linkred list associated with the charecter set of "multiSet"
+        param:self , multiset:list
+        """
         curr=self
         
         if not(curr.isEmpty()):
@@ -67,49 +97,18 @@ class linkedList():
 
     
     def __str__(self)->str:
+        """Overides the print function"""
         res=str(self.element)
         if self.hasNext():
             res += self.next.__str__()
         return res 
     
-    # def getElements(self):
-    #     currentElement=self
-    #     currentElementlist = [self.element[0]]
-    #     if currentElement.hasNext():
-    #         currentElement=currentElement.next
-    #         currentElementlist.append(currentElement.getElements())
-    #     return currentElementlist
-  
-
-    # def getElementFromIndex(self,index):
-        
-    #     currentnode=self
-    #     if currentnode.size!=index:
-    #         if currentnode.hasNext():
-    #             currentnode=self.next
-          
-    #     return currentnode.element
-        
-            
-
-
-        
-
-        
-    
-   
-
-
-
-        
-
-        
 
 class HashTable:
     """
     HashTable is a class that implements a hash table with its own hach function "getHash".
-    HasTable : hash(key) --> Value = [multiSet,words asscociated with the multiSet] 
-    we initialize the hashtable as empty and we can insert ,find , remove element from our hashtable.
+    HasTable : hash(key) --> Value = [multiSet,words asscociated with the multiSet ...] 
+    we initialize the hashtable as empty and we can insert ,find elements from our hashtable.
         
     """
 
@@ -158,26 +157,6 @@ class HashTable:
         if linkedlist.isEmpty():
             self.keys.__setitem__(hash,linkedList([key,value],None))
             return True
-        # print(self.keys[hash].getElements())
-        # print('key',key)
-        # if key in self.keys[hash].getElements():
-            
-        #     index=self.keys[hash].getElements().index(key)
-        #     target = self.keys[hash]
-        #     for i in range(0,index):
-        #         if target.next is not None:
-        #             target=target.next
-        #         break;
-        #     if value not in target.element:
-        #         self.keys[hash].element.append(value)
-        # elements=self.keys[hash].getElements()
-    
-    
-        # if key in elements:
-        #     elementIndex=elements.index(key)
-        #     node=self.keys[hash]
-        #     if value not in node.getElementFromIndex(elementIndex) :
-        #         node.getElementFromIndex(elementIndex).append(value)
         while linkedlist is not None:
             if key in linkedlist.element:
                 if value not in linkedlist.element:
@@ -210,6 +189,10 @@ class HashTable:
         return not(elemnt ==None)
     
     def getAllCombinationsOfaMultiSet(self,multiset):
+        """
+        returns:a list of all possible commbination of a charecter set
+        param: multiset:list
+        """
         res=[]
         for i in range(1,len(multiset)):
             for subSet in combinations(multiset, i):
@@ -219,6 +202,11 @@ class HashTable:
     
     
     def getComplementaryOfSet(self,multiset,set,allCombinations):
+        """
+        returns:list of all complements of set that add up to multiset
+        param: multiset:list,set:list,allCombinations:list
+        
+        """
         res=[]
         for comb in allCombinations:
             
@@ -234,30 +222,12 @@ class HashTable:
     
 
 
-
-    # def twosum(self,multiset,showExecutionTime=False):
-    #     """
-    #     returns :the list containing the words that add up to the 2 sum of the given multiset
-    #     param : key=type:list of charecters and Value
-        
-    #     """
-    #     res = []
-    #     allCombination = self.getAllCombinationsOfaMultiSet(multiset)
-
-    #     max = len(allCombination)
-    #     print(max)
-    #     progress=0
-    #     for comb in allCombination:
-    #         progress+=1
-    #         complementary = self.getComplementaryOfSet(multiset,list(comb))
-    #         if complementary is not None:
-    #             if self.exists(list(comb)) & self.exists(complementary):
-    #                 elementComb = self.get()list(comb)
-    #                 elementComp = self.get(complementary) 
-    #                 res.append((list(comb),complementary))
-    #         print((progress/max)*100)
-    #     return res
-    def twoSum (self,multiset):
+    def twoSum (self,multiset,showExecutionTime=False):
+        """
+        returns:the couple of words(U,V) where the sum the set of charecters that make up U and V
+        and add up to the multiSet 
+        param: multiset:list
+        """
         res=[]
         allCombinations =self.getAllCombinationsOfaMultiSet(multiset)
         allCombinationsOfAMultiSet=self.getAllCombinationsOfaMultiSet(multiset)
@@ -269,19 +239,13 @@ class HashTable:
             progress+=1
             for complementary in self.getComplementaryOfSet(multiset,combination,allCombinations):
                 print("combination : ",combination,"complementary :",complementary)
-                print((progress/max)*100)
-                
-             
                 allCombinationOfmultiSetandComplementary.append((list(combination),list(complementary)))
         
-        max = len(allCombinationOfmultiSetandComplementary)
-        progress=0
         for couple in allCombinationOfmultiSetandComplementary:
             combination = self.get(list(couple[0])).getElementFromMuliset(list(couple[0]))
             complementary=self.get(list(couple[1])).getElementFromMuliset(list(couple[1]))
-            progress+=1
             if not(combination is None and complementary is None):
-                res.append((combination.__str__(),complementary.__str__()))
+                res.append((combination,complementary))
 
         return res
 
