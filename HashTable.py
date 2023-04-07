@@ -2,7 +2,7 @@ import math
 from itertools import repeat
 from itertools import combinations
 import time
-SIZEMAX=89
+SIZEMAX=107
 PHI = (1+math.sqrt(5))/2
 
 
@@ -28,6 +28,19 @@ class linkedList():
 
     def get(self):
        return self.element
+    def exists(self,element):
+        curr = self
+        
+        if curr.element!= element:
+            if curr.hasNext:
+                curr=curr.next
+                curr.exists(element)
+            else:return False
+        
+
+        return True
+
+
     
     def isEmpty(self):
         return ((self.element==[])&(self.next is None))
@@ -37,6 +50,21 @@ class linkedList():
     
     def __next__(self):
         return self.next
+    
+    def getElementFromMuliset(self,multiset):
+        curr=self
+        
+        if not(curr.isEmpty()):
+            if curr.element[0]!=sorted(multiset):
+                if curr.hasNext():
+                    curr=curr.next
+                    curr.getElementFromMuliset(multiset)
+                return None
+            res=curr.element[1:]
+            return res
+        return None
+
+
     
     def __str__(self)->str:
         res=str(self.element)
@@ -178,7 +206,8 @@ class HashTable:
         param : key=type:list of charecters and Value
         """
         item = self.get(key)
-        return not(item.isEmpty())
+        elemnt =item.getElementFromMuliset(key)
+        return not(elemnt ==None)
     
     def getAllCombinationsOfaMultiSet(self,multiset):
         res=[]
@@ -187,14 +216,21 @@ class HashTable:
                 if subSet not in res:
                     res.append(subSet)
         return res
-    def getComplementaryOfSet(self,multiset,set):
-        allCombinations=self.getAllCombinationsOfaMultiSet(multiset)
-        for comb in allCombinations: 
-            sum= list(comb)
-            sum=sum +set
-            sum =sorted(sum)
-            if sum == multiset:
-                return list(comb)
+    
+    
+    def getComplementaryOfSet(self,multiset,set,allCombinations):
+        res=[]
+        for comb in allCombinations:
+            
+            if list(comb) not in res:
+                sum= list(comb)
+                sum=sum + list(set)
+                sum =sorted(sum)
+                
+                if sum == multiset and self.exists(list(comb)):
+                    res.append(list(comb))
+        return res
+            
     
 
 
@@ -204,8 +240,50 @@ class HashTable:
     #     returns :the list containing the words that add up to the 2 sum of the given multiset
     #     param : key=type:list of charecters and Value
         
-        
     #     """
+    #     res = []
+    #     allCombination = self.getAllCombinationsOfaMultiSet(multiset)
+
+    #     max = len(allCombination)
+    #     print(max)
+    #     progress=0
+    #     for comb in allCombination:
+    #         progress+=1
+    #         complementary = self.getComplementaryOfSet(multiset,list(comb))
+    #         if complementary is not None:
+    #             if self.exists(list(comb)) & self.exists(complementary):
+    #                 elementComb = self.get()list(comb)
+    #                 elementComp = self.get(complementary) 
+    #                 res.append((list(comb),complementary))
+    #         print((progress/max)*100)
+    #     return res
+    def twoSum (self,multiset):
+        res=[]
+        allCombinations =self.getAllCombinationsOfaMultiSet(multiset)
+        allCombinationsOfAMultiSet=self.getAllCombinationsOfaMultiSet(multiset)
+        allCombinationOfmultiSetandComplementary=[]
+        max = len(allCombinationsOfAMultiSet)
+        print(max)
+        progress=0
+        for combination in allCombinationsOfAMultiSet:
+            progress+=1
+            for complementary in self.getComplementaryOfSet(multiset,combination,allCombinations):
+                print("combination : ",combination,"complementary :",complementary)
+                print((progress/max)*100)
+                
+             
+                allCombinationOfmultiSetandComplementary.append((list(combination),list(complementary)))
+        
+        max = len(allCombinationOfmultiSetandComplementary)
+        progress=0
+        for couple in allCombinationOfmultiSetandComplementary:
+            combination = self.get(list(couple[0])).getElementFromMuliset(list(couple[0]))
+            complementary=self.get(list(couple[1])).getElementFromMuliset(list(couple[1]))
+            progress+=1
+            if not(combination is None and complementary is None):
+                res.append((combination.__str__(),complementary.__str__()))
+
+        return res
 
       
 

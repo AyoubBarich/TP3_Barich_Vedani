@@ -21,8 +21,6 @@ UNIVERSEmini=readFileToList("./mini")
 UNIVERSE=readFileToList("./dictionnaire")
 
 
-
-
 def Dictionary(dictionary,showExecutionTime=False):
     start = time.time()
     ht = HashTable()
@@ -37,11 +35,11 @@ def Dictionary(dictionary,showExecutionTime=False):
 #############################TestMini############################
 Firstmultiset= ['a', 'd', 'e', 'e', 'i', 'i', 'l', 'n', 'n', 'n', 'o', 'r', 'u', 'x']
 Secondmultiset=['a', 'a', 'a', 'a', 'e', 'i', 'n', 'n', 'o', 'r', 's', 's', 's', 's', 't', 'w', 'z']
-# Dictionary(UNIVERSEmini,True)
+dict= Dictionary(UNIVERSEmini,True)
 # print(Dictionary(UNIVERSEmini))
 
-# print(Dictionary(UNIVERSEmini).twosum(Firstmultiset,True))
-# print(Dictionary(UNIVERSEmini).twosum(Secondmultiset,True))
+print(dict.twoSum(Firstmultiset))
+print(Dictionary(UNIVERSEmini).twoSum(Secondmultiset))
 #############################TestFull############################
 R=['a','o','u','u']
 ht = HashTable()
@@ -50,10 +48,16 @@ ht.set(['t','r','a'],"rat")
 ht.set(['c', 'e', 'h', 'r', 't', 'é'],"rta")
 ht.set(['c', 'e', 'h', 'r', 't', 'é'],"cet")
 ht.set(['e', 'i', 'l', 't', 'u'],'mm')
+ht.set(['e', 'i', 'l', 't', 'u'],'hello')
 ht.set(['u','s','a'],"usa")
 ht.set(['a','u'],"au")
 ht.set(['o','u'],"ou")
-print(ht.getComplementaryOfSet(R,['a','u']))
+ht.set(['d', 'e', 'i', 'i', 'n', 'o', 'x'],"dioxine")
+
+# print(ht)
+# print(ht.twoSum(R))
+
+# print(ht.getComplementaryOfSet(['a','o','u','u'],['a','u']))
 
 
 
